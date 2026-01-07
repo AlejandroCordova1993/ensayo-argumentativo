@@ -12,6 +12,7 @@ import { QuizSection } from './components/QuizSection';
 import { OrderingGame } from './components/OrderingGame';
 import { FillBlanks } from './components/FillBlanks';
 import { Tooltip } from './components/Tooltip';
+import { EssayExample } from './components/EssayExample';
 
 // ================== SECTION BACKGROUND COLORS (Soft Pastels) ==================
 const SECTION_COLORS = {
@@ -22,6 +23,7 @@ const SECTION_COLORS = {
   planificacion: 'bg-gradient-to-b from-rose-50/50 to-pink-50/40',
   tesis: 'bg-gradient-to-b from-emerald-50/50 to-green-50/40',
   argumentos: 'bg-gradient-to-b from-sky-50/60 to-blue-50/40',
+  ejemplo: 'bg-gradient-to-b from-indigo-50/60 to-violet-50/40',
 };
 
 // ================== DATA ==================
@@ -502,6 +504,18 @@ function PlanningSection() {
   );
 }
 
+// ================== ESSAY EXAMPLE SECTION ==================
+function EssayExampleSection() {
+  return (
+    <Section id="ejemplo" bg={SECTION_COLORS.ejemplo}>
+      <SectionTitle subtitle="Analiza un ensayo real paso a paso">
+        📖 Ejemplo Práctico
+      </SectionTitle>
+      <EssayExample />
+    </Section>
+  );
+}
+
 // ================== NAVIGATION ==================
 function Navigation() {
   const { student } = useStudent();
@@ -512,6 +526,7 @@ function Navigation() {
     { label: 'Estructura', href: '#estructura' },
     { label: 'La Tesis', href: '#tesis' },
     { label: 'Argumentos', href: '#argumentos' },
+    { label: 'Ejemplo', href: '#ejemplo' },
     { label: 'Planificación', href: '#planificacion' },
   ];
 
@@ -608,6 +623,7 @@ function MainContent() {
       <StructureSection />
       <ThesisSection />
       <ArgumentsSection />
+      <EssayExampleSection />
       <PlanningSection />
       <ResultsSummary />
       <footer className="py-10 text-center text-slate-500 text-sm bg-white border-t border-slate-200">

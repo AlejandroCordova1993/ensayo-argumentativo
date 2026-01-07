@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis del Ensayo Argumentativo</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-secondary: #FFC107;
+            --color-success: #4CAF50;
+            --color-info: #FF6B6B;
+            --color-bg: #f5f5f5;
+            --color-card: #ffffff;
+            --color-text: #333333;
+            --color-text-light: #666666;
+            --color-border: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #1976D2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background-color: var(--color-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 6px solid;
+        }
+
+        .section-intro {
+            border-left-color: var(--color-primary);
+        }
+
+        .section-desarrollo {
+            border-left-color: var(--color-secondary);
+        }
+
+        .section-conclusion {
+            border-left-color: var(--color-success);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .section-title .icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .subsection-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+
+        .paragraph-text {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--color-primary);
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            border-radius: 4px;
+            color: var(--color-text-light);
+        }
+
+        .section-desarrollo .paragraph-text {
+            border-left-color: var(--color-secondary);
+        }
+
+        .section-conclusion .paragraph-text {
+            border-left-color: var(--color-success);
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1em;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .thesis-box {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.05) 100%);
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 1.1em;
+        }
+
+        .argument-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--color-secondary);
+        }
+
+        .argument-card h4 {
+            color: var(--color-secondary);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .argument-type {
+            display: inline-block;
+            background-color: var(--color-secondary);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .argument-explanation {
+            background-color: #fff;
+            border-left: 4px solid var(--color-secondary);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .support-thesis {
+            background-color: #f0f0f0;
+            border-left: 4px solid var(--color-info);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: var(--color-text-light);
+        }
+
+        .why-explanation {
+            background-color: #fffbea;
+            border-left: 4px solid #FFB300;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .activity-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .activity-section h3 {
+            color: var(--color-success);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .activity-section ol {
+            margin-left: 20px;
+        }
+
+        .activity-section li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            background-color: var(--color-card);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 6px solid var(--color-info);
+            font-style: italic;
+            text-align: center;
+            font-size: 1.05em;
+            color: var(--color-text);
+        }
+
+        .argument-number {
+            display: inline-block;
+            background-color: var(--color-secondary);
+            color: #000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .tab-btn {
+            background-color: transparent;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            color: var(--color-text-light);
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-btn:hover {
+            color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .subsection-title {
+                font-size: 1.1em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Análisis del Ensayo Argumentativo</h1>
+        <p>"La Cancha no Tiene Género" - Desglozado por secciones</p>
+    </header>
+
+    <div class="container">
+        <!-- INTRODUCCIÓN -->
+        <div class="section section-intro">
+            <div class="section-title">
+                <span class="icon">📘</span>
+                INTRODUCCIÓN
+            </div>
+
+            <div class="paragraph-text">
+                "El deporte es una herramienta fundamental para el desarrollo humano, pero lamentablemente sigue lleno de prejuicios. La sociedad a menudo decide qué deportes son 'apropiados' para hombres y cuáles para mujeres. Esta división por género es absurda y debe desaparecer para que el talento sea lo único que importe."
+            </div>
+
+            <div class="subsection-title">¿Por qué es INTRODUCCIÓN?</div>
+            <ul class="checklist">
+                <li><strong>Presenta el TEMA GENERAL:</strong> El párrafo inicia hablando del deporte como un concepto amplio.</li>
+                <li><strong>Identifica el PROBLEMA:</strong> Señala que existen prejuicios de género en el deporte.</li>
+                <li><strong>Contextualiza la situación:</strong> Explica cómo la sociedad asigna deportes según el género, lo cual es injusto.</li>
+                <li><strong>Expresa la POSICIÓN DEL AUTOR:</strong> Es claro que el autor está en CONTRA de esta división.</li>
+            </ul>
+
+            <div class="subsection-title">LA TESIS (Idea Principal)</div>
+            <div class="thesis-box">
+                "Esta división por género es absurda y debe desaparecer para que el talento sea lo único que importe."
+            </div>
+
+            <div class="subsection-title">¿Por qué esta oración es la TESIS?</div>
+            <ul class="checklist">
+                <li>Es la <strong>idea principal</strong> que todo el ensayo defenderá.</li>
+                <li>Es una <strong>posición clara:</strong> no está pidiendo que pienses, está diciendo lo que cree que es correcto.</li>
+                <li>Todos los argumentos que vienen después buscan <strong>convencerte de que esta idea es verdadera.</strong></li>
+                <li>Si alguien dijera "no, creo que la división de género en el deporte es correcta", el autor usaría los argumentos siguientes para convencerlo.</li>
+            </ul>
+        </div>
+
+        <!-- DESARROLLO -->
+        <div class="section section-desarrollo">
+            <div class="section-title">
+                <span class="icon">📗</span>
+                DESARROLLO - Los 4 Argumentos
+            </div>
+
+            <p>El desarrollo contiene 4 argumentos diferentes. Cada uno tiene un propósito específico.</p>
+
+            <!-- ARGUMENTO 1 -->
+            <div class="argument-card">
+                <h4><span class="argument-number">1</span>Los Hechos y Cifras</h4>
+                
+                <div class="paragraph-text">
+                    "Un análisis reciente de canales deportivos mostró que el 90% del tiempo de transmisión en horario estelar se dedica a deportes masculinos, dejando solo un 10% para las competencias femeninas. Esta desproporción nos hace creer que el deporte femenino es menos valioso."
+                </div>
+
+                <div class="subsection-title">¿Por qué es DESARROLLO?</div>
+                <ul class="checklist">
+                    <li><strong>Presenta un argumento específico:</strong> No habla de deporte en general, sino de cómo los medios cubren el deporte.</li>
+                    <li><strong>Ofrece EVIDENCIA:</strong> Da números concretos (90% vs 10%) para demostrar que existe un problema real.</li>
+                    <li><strong>Apoya la TESIS:</strong> Demuestra que la división de género es real y provoca desigualdad.</li>
+                </ul>
+
+                <div class="argument-type">Hechos y Cifras</div>
+                <div class="argument-explanation">
+                    <strong>¿Por qué es este tipo?</strong> Usa <strong>datos estadísticos reales</strong> (90% y 10%). Es poderoso porque no es una opinión, es un hecho verificable. Responde a la pregunta: "¿Prueba real de que existe injusticia?" ✓ Sí, estos números lo muestran.
+                </div>
+
+                <div class="support-thesis">
+                    <strong>¿Cómo apoya la TESIS?</strong> Si la tesis dice "la división de género debe desaparecer", este argumento muestra: "Aquí está la prueba de que esa división existe y causa problemas reales."
+                </div>
+            </div>
+
+            <!-- ARGUMENTO 2 -->
+            <div class="argument-card">
+                <h4><span class="argument-number">2</span>Causa y Consecuencia</h4>
+                
+                <div class="paragraph-text">
+                    "Debido a que las niñas ven pocos referentes femeninos exitosos en la televisión, muchas abandonan la actividad física en la adolescencia al sentir que 'no es un lugar para ellas'. Es un círculo vicioso que limita su potencial."
+                </div>
+
+                <div class="subsection-title">¿Por qué es DESARROLLO?</div>
+                <ul class="checklist">
+                    <li><strong>Continúa con un argumento diferente:</strong> Ya vimos que existe desigualdad en los medios (Argumento 1), ahora vemos QUÉ PASA como consecuencia.</li>
+                    <li><strong>Establece una relación CAUSA → CONSECUENCIA:</strong> La falta de visibilidad (causa) hace que las niñas abandonen el deporte (consecuencia).</li>
+                    <li><strong>Profundiza el problema:</strong> No solo es injusto en los medios, sino que tiene efectos negativos en la vida de las personas.</li>
+                </ul>
+
+                <div class="argument-type">Causa y Consecuencia</div>
+                <div class="argument-explanation">
+                    <strong>¿Por qué es este tipo?</strong> Explica <strong>por qué sucede algo</strong> (causa: falta de referentes) y <strong>qué resultado tiene</strong> (consecuencia: abandono del deporte). Este argumento es poderoso porque muestra que el problema no solo es teórico, tiene impactos reales en las personas.
+                </div>
+
+                <div class="support-thesis">
+                    <strong>¿Cómo apoya la TESIS?</strong> Si la tesis dice "la división de género debe desaparecer", este argumento muestra: "Si no eliminamos esta división, las niñas perderán oportunidades. Eso es injusto y hay que cambiar."
+                </div>
+            </div>
+
+            <!-- ARGUMENTO 3 -->
+            <div class="argument-card">
+                <h4><span class="argument-number">3</span>Autoridad</h4>
+                
+                <div class="paragraph-text">
+                    "Expertos en medicina deportiva de la Universidad de Stanford han demostrado que, con el entrenamiento adecuado, la capacidad de resistencia mental en mujeres y hombres es idéntica. No hay cerebros 'rosas' o 'azules' para competir."
+                </div>
+
+                <div class="subsection-title">¿Por qué es DESARROLLO?</div>
+                <ul class="checklist">
+                    <li><strong>Refuta un prejuicio común:</strong> Algunos podrían pensar "bueno, pero las mujeres y hombres somos biológicamente diferentes."</li>
+                    <li><strong>Usa AUTORIDAD científica:</strong> No es el autor quien lo dice, sino expertos reconocidos de una universidad prestigiosa.</li>
+                    <li><strong>Desactiva el argumento opuesto:</strong> Demuestra que aunque existan diferencias físicas, mentalmente somos iguales para competir.</li>
+                </ul>
+
+                <div class="argument-type">Autoridad</div>
+                <div class="argument-explanation">
+                    <strong>¿Por qué es este tipo?</strong> Recurre a <strong>expertos reconocidos</strong> (medicina deportiva, Universidad de Stanford). Es poderoso porque no es solo una opinión, viene de personas que estudiaron esto profesionalmente. Responde a la pregunta: "¿Qué dicen los expertos?" La respuesta es clara: no hay diferencia mental.
+                </div>
+
+                <div class="support-thesis">
+                    <strong>¿Cómo apoya la TESIS?</strong> Si la tesis dice "la división de género debe desaparecer", este argumento muestra: "No es científicamente cierto que hombres y mujeres sean diferentes mentalmente en el deporte. La división es SOCIAL, no biológica. Por lo tanto, es absurda."
+                </div>
+            </div>
+
+            <!-- ARGUMENTO 4 -->
+            <div class="argument-card">
+                <h4><span class="argument-number">4</span>Comparación o Contraste</h4>
+                
+                <div class="paragraph-text">
+                    "Mientras que a un futbolista hombre se le aplauda por ser agresivo y fuerte en la cancha, a una mujer con la misma actitud competitiva se la critica frecuentemente por ser 'poco femenina' o tosca."
+                </div>
+
+                <div class="subsection-title">¿Por qué es DESARROLLO?</div>
+                <ul class="checklist">
+                    <li><strong>Compara dos situaciones idénticas:</strong> Un futbolista hombre y una futbolista mujer hacen LO MISMO (ser agresivo y fuerte).</li>
+                    <li><strong>Muestra el doble estándar:</strong> Pero reciben TRATAMIENTO DIFERENTE según su género.</li>
+                    <li><strong>Demuestra que es discriminación SOCIAL:</strong> No es una diferencia biológica, es simplemente cómo la sociedad juzga diferente a hombres y mujeres.</li>
+                </ul>
+
+                <div class="argument-type">Comparación o Contraste</div>
+                <div class="argument-explanation">
+                    <strong>¿Por qué es este tipo?</strong> Pone dos cosas lado a lado para mostrar que son <strong>idénticas en lo importante, pero se tratan diferente.</strong> Es poderoso porque es fácil de entender: si dos personas hacen lo mismo pero se critican diferente, eso es injusto.
+                </div>
+
+                <div class="support-thesis">
+                    <strong>¿Cómo apoya la TESIS?</strong> Si la tesis dice "la división de género debe desaparecer", este argumento muestra: "La desigualdad no viene de diferencias reales, sino de normas sociales injustas. Eso es ABSURDO, como dice la tesis."
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCLUSIÓN -->
+        <div class="section section-conclusion">
+            <div class="section-title">
+                <span class="icon">📙</span>
+                CONCLUSIÓN
+            </div>
+
+            <div class="paragraph-text">
+                "Finalmente, debemos apelar a lo justo. La igualdad de oportunidades es un valor esencial de la democracia; impedir que alguien practique ballet o rugby solo por su género es negar su derecho a la libertad. Romper estas barreras nos hará una sociedad más sana."
+            </div>
+
+            <div class="subsection-title">¿Por qué es CONCLUSIÓN?</div>
+            <ul class="checklist">
+                <li><strong>Sintetiza lo discutido:</strong> Dice "Finalmente", señalando que estamos cerrando.</li>
+                <li><strong>No introduce argumentos nuevos:</strong> No trae nuevas pruebas, sino que usa todo lo dicho antes.</li>
+                <li><strong>Refuerza la TESIS original:</strong> Vuelve a la idea central de que la división de género debe desaparecer.</li>
+                <li><strong>Apela a valores universales:</strong> Habla de justicia, democracia, libertad y bienestar social.</li>
+            </ul>
+
+            <div class="argument-type" style="background-color: var(--color-success); color: white;">Valores</div>
+            <div class="argument-explanation">
+                <strong>¿Por qué es este tipo?</strong> Apela a conceptos que la mayoría acepta: <strong>justicia, democracia, libertad, sociedad sana.</strong> Es poderoso porque usa valores que casi nadie rechazaría. Transforma el debate de "hechos" a "moral": "Esto es lo JUSTO."
+            </div>
+
+            <div class="support-thesis">
+                <strong>¿Cómo apoya la TESIS?</strong> La conclusión dice: "Ahora que hemos visto todas las pruebas, debemos aceptar esta verdad porque es JUSTA y porque la democracia la exige. Romper estas barreras nos hace más humanos."
+            </div>
+        </div>
+
+        <!-- RESUMEN TABLE -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🎯</span>
+                RESUMEN: ¿Por qué cada parte es lo que es?
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>PARTE</th>
+                        <th>FUNCIÓN</th>
+                        <th>CÓMO LO HACE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>INTRODUCCIÓN</strong></td>
+                        <td>Presenta el tema y la posición del autor</td>
+                        <td>Explica qué es el problema y cuál es la tesis a defender</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DESARROLLO<br>(4 argumentos)</strong></td>
+                        <td>Defiende la tesis con pruebas específicas</td>
+                        <td>Usa hechos, causas, autoridades y comparaciones para convencer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CONCLUSIÓN</strong></td>
+                        <td>Cierra y refuerza la tesis</td>
+                        <td>Sintetiza todo apelando a valores universales</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ACTIVIDAD -->
+        <div class="activity-section">
+            <h3>📝 Actividad para practicar:</h3>
+            <ol>
+                <li><strong>Lee la INTRODUCCIÓN:</strong> ¿Cuál es la TESIS? Escríbela con tus propias palabras.</li>
+                <li><strong>Lee cada ARGUMENTO:</strong> Identifica qué tipo es (hechos, causa-consecuencia, autoridad, comparación).</li>
+                <li><strong>Lee la CONCLUSIÓN:</strong> ¿Cuál es el valor universal al que apela?</li>
+                <li><strong>Respuesta final:</strong> ¿Crees que los argumentos convencen? ¿Por qué?</li>
+            </ol>
+        </div>
+
+        <!-- FOOTER NOTE -->
+        <div class="footer-note">
+            💡 <strong>Recuerda:</strong> Un ensayo argumentativo es como un abogado en un juicio. La INTRODUCCIÓN dice qué quiere probar. El DESARROLLO presenta las pruebas. La CONCLUSIÓN convince al juez de que tiene razón.
+        </div>
+    </div>
+</body>
+</html>
