@@ -361,6 +361,23 @@ function ThesisGame() {
           </>
         )}
 
+        {/* Feedback Banner */}
+        <AnimatePresence>
+          {feedback && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className={`absolute top-2 left-1/2 -translate-x-1/2 z-20 px-6 py-3 rounded-full font-bold text-lg shadow-lg ${feedback === 'correct'
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-red-500 text-white'
+                }`}
+            >
+              {feedback === 'correct' ? '✓ ¡Correcto!' : '✗ Incorrecto'}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <AnimatePresence mode="wait">
           {items.length > 0 ? (
             <motion.div
