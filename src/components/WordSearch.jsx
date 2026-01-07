@@ -154,22 +154,35 @@ export function WordSearch() {
             </div>
 
             <div className="flex flex-col md:flex-row gap-6">
-                <div
-                    className="grid gap-1 select-none mx-auto"
-                    style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))` }}
-                >
-                    {grid.map((row, y) =>
-                        row.map((cell, x) => (
-                            <div
-                                key={`${x},${y}`}
-                                onMouseDown={() => handleMouseDown(x, y)}
-                                onMouseEnter={() => handleMouseEnter(x, y)}
-                                className={`w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-sm font-bold rounded cursor-pointer transition-colors ${getCellClass(x, y)}`}
-                            >
-                                {cell}
-                            </div>
-                        ))
-                    )}
+                <div className="overflow-x-auto pb-2">
+                    <div
+                        className="grid gap-0.5 md:gap-1 select-none mx-auto"
+                        style={{ gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`, minWidth: '280px' }}
+                    >
+                        {grid.map((row, y) =>
+                            row.map((cell, x) => (
+                                <div
+                                    key={`${x},${y}`}
+                                    onMouseDown={() => handleMouseDown(x, y)}
+                                    onMouseEnter={() => handleMouseEnter(x, y)}
+                                    onTouchStart={() => handleMouseDown(x, y)}
+                                    onTouchMove={(e) => {
+                                        const touch = e.touches[0];
+                                        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                                        if (element && element.dataset.coords) {
+                                            const [tx, ty] = element.dataset.coords.split(',').map(Number);
+                                            handleMouseEnter(tx, ty);
+                                        }
+                                    }}
+                                    onTouchEnd={handleMouseUp}
+                                    data-coords={`${x},${y}`}
+                                    className={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 flex items-center justify-center text-xs sm:text-sm font-bold rounded cursor-pointer transition-colors ${getCellClass(x, y)}`}
+                                >
+                                    {cell}
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
 
                 <div className="flex flex-wrap md:flex-col gap-2 justify-center">

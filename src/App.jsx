@@ -347,16 +347,16 @@ function ThesisGame() {
         </div>
       </div>
 
-      <div className="relative w-full min-h-[280px] flex items-center justify-center">
+      <div className="relative w-full min-h-[240px] sm:min-h-[280px] flex items-center justify-center">
         {items.length > 0 && (
           <>
-            <div className="absolute left-0 top-0 bottom-0 w-[38%] bg-gradient-to-br from-red-50 to-red-100/50 rounded-2xl border-2 border-dashed border-red-300 flex flex-col items-center justify-center p-4">
-              <X className="w-8 h-8 text-red-400 mb-2" />
-              <span className="text-red-700 font-bold">HECHO</span>
+            <div className="absolute left-0 top-0 bottom-0 w-[32%] sm:w-[38%] bg-gradient-to-br from-red-50 to-red-100/50 rounded-xl sm:rounded-2xl border-2 border-dashed border-red-300 flex flex-col items-center justify-center p-2 sm:p-4">
+              <X className="w-6 h-6 sm:w-8 sm:h-8 text-red-400 mb-1 sm:mb-2" />
+              <span className="text-red-700 font-bold text-xs sm:text-base">HECHO</span>
             </div>
-            <div className="absolute right-0 top-0 bottom-0 w-[38%] bg-gradient-to-bl from-emerald-50 to-emerald-100/50 rounded-2xl border-2 border-dashed border-emerald-300 flex flex-col items-center justify-center p-4">
-              <Check className="w-8 h-8 text-emerald-400 mb-2" />
-              <span className="text-emerald-700 font-bold">TESIS</span>
+            <div className="absolute right-0 top-0 bottom-0 w-[32%] sm:w-[38%] bg-gradient-to-bl from-emerald-50 to-emerald-100/50 rounded-xl sm:rounded-2xl border-2 border-dashed border-emerald-300 flex flex-col items-center justify-center p-2 sm:p-4">
+              <Check className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400 mb-1 sm:mb-2" />
+              <span className="text-emerald-700 font-bold text-xs sm:text-base">TESIS</span>
             </div>
           </>
         )}
@@ -369,8 +369,8 @@ function ThesisGame() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               className={`absolute top-2 left-1/2 -translate-x-1/2 z-20 px-6 py-3 rounded-full font-bold text-lg shadow-lg ${feedback === 'correct'
-                  ? 'bg-emerald-500 text-white'
-                  : 'bg-red-500 text-white'
+                ? 'bg-emerald-500 text-white'
+                : 'bg-red-500 text-white'
                 }`}
             >
               {feedback === 'correct' ? '✓ ¡Correcto!' : '✗ Incorrecto'}
@@ -393,11 +393,12 @@ function ThesisGame() {
                     { scale: 1, opacity: 1, y: 0 }
               }
               exit={{ scale: 0.5, opacity: 0 }}
-              className="absolute z-10 w-64 md:w-80 bg-white shadow-2xl rounded-2xl p-6 text-center cursor-grab active:cursor-grabbing border border-slate-200"
+              className="absolute z-10 w-52 sm:w-64 md:w-80 bg-white shadow-2xl rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center cursor-grab active:cursor-grabbing border border-slate-200"
+              style={{ touchAction: 'none' }}
               whileDrag={{ scale: 1.05, rotate: 3 }}
             >
-              <GripVertical className="w-5 h-5 text-slate-300 mx-auto mb-3" />
-              <p className="text-base font-medium text-slate-800">{currentItem.text}</p>
+              <GripVertical className="w-4 h-4 sm:w-5 sm:h-5 text-slate-300 mx-auto mb-2 sm:mb-3" />
+              <p className="text-sm sm:text-base font-medium text-slate-800">{currentItem.text}</p>
             </motion.div>
           ) : (
             <motion.div
@@ -504,6 +505,7 @@ function PlanningSection() {
 // ================== NAVIGATION ==================
 function Navigation() {
   const { student } = useStudent();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const links = [
     { label: '¿Qué es?', href: '#intro' },
@@ -512,12 +514,19 @@ function Navigation() {
     { label: 'Argumentos', href: '#argumentos' },
     { label: 'Planificación', href: '#planificacion' },
   ];
+
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-6 py-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <span className="font-black text-xl text-blue-900">✍️ El Ensayo Argumentativo</span>
-        <div className="flex items-center gap-6">
-          <div className="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+        <span className="font-black text-lg sm:text-xl text-blue-900">✍️ El Ensayo</span>
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-6">
+          <div className="flex gap-6 text-sm font-medium text-slate-600">
             {links.map(link => (
               <a key={link.href} href={link.href} className="hover:text-blue-600 transition-colors">
                 {link.label}
@@ -525,13 +534,59 @@ function Navigation() {
             ))}
           </div>
           {student && (
-            <div className="text-right hidden sm:block">
+            <div className="text-right border-l border-slate-200 pl-4">
               <p className="text-sm font-medium text-slate-700">{student.name} {student.lastName}</p>
               <p className="text-xs text-slate-500">{student.course}</p>
             </div>
           )}
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 rounded-lg bg-slate-100 text-slate-600"
+          aria-label="Menú"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {mobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* Mobile Dropdown */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-t border-slate-100 overflow-hidden"
+          >
+            <div className="px-4 py-3 space-y-2">
+              {links.map(link => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className="block py-2 px-3 rounded-lg text-slate-700 hover:bg-blue-50 hover:text-blue-600 font-medium"
+                >
+                  {link.label}
+                </a>
+              ))}
+              {student && (
+                <div className="pt-2 mt-2 border-t border-slate-100 text-center">
+                  <p className="text-sm font-medium text-slate-700">{student.name} {student.lastName}</p>
+                  <p className="text-xs text-slate-500">{student.course}</p>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
