@@ -43,7 +43,7 @@ function Section({ children, className = '', id, bg }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6 }}
-      className={`py-16 md:py-20 px-6 md:px-12 lg:px-20 ${bg || ''} ${className}`}
+      className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-20 ${bg || ''} ${className}`}
     >
       <div className="max-w-5xl mx-auto">{children}</div>
     </motion.section>
@@ -600,7 +600,7 @@ function MainContent() {
   }
 
   return (
-    <div className="pt-16 overflow-x-hidden bg-slate-50">
+    <div className="pt-14 sm:pt-16 overflow-x-hidden bg-slate-50">
       <Navigation />
       <IntroSection />
       <PurposesSection />
